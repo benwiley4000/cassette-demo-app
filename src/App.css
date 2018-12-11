@@ -30,3 +30,7 @@
     transform: rotate(360deg);
   }
 }
+
+.media_player_container > * {
+  width: calc(100vw - 3rem);
+}
