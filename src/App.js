@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import './App.css';
 
-import { MediaPlayer } from '@cassette/player';
+import {
+  PlayerContextProvider,
+  FullscreenContextProvider
+} from '@cassette/core';
+import { MediaPlayerControls } from '@cassette/player';
 import '@cassette/player/dist/css/cassette-player.css';
 
 import playlist from './playlist';
@@ -30,46 +34,51 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <div className="media_player_container">
-            <MediaPlayer
-              showVideo
-              playlist={playlist}
-              controls={[
-                'spacer',
-                'playpause',
-                'forwardskip',
-                'volume',
-                'repeat',
-                'shuffle',
-                playerContext => (
-                  <TrackPosition
-                    activeTrackIndex={playerContext.activeTrackIndex}
-                    playlist={playerContext.playlist}
-                  />
-                ),
-                'spacer',
-                'progress',
-                'fullscreen'
-              ]}
-              initialStateSnapshot={this.snapshot}
-              onStateSnapshot={shot => {
-                localStorage.setItem('media_snapshot', JSON.stringify(shot));
-              }}
-            />
-          </div>
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <PlayerContextProvider
+          playlist={playlist}
+          initialStateSnapshot={this.snapshot}
+          onStateSnapshot={shot => {
+            localStorage.setItem('media_snapshot', JSON.stringify(shot));
+          }}
+        >
+          <header className="App-header">
+            <div className="media_player_container">
+              <FullscreenContextProvider>
+                <MediaPlayerControls
+                  showVideo
+                  controls={[
+                    'spacer',
+                    'playpause',
+                    'forwardskip',
+                    'volume',
+                    'repeat',
+                    'shuffle',
+                    playerContext => (
+                      <TrackPosition
+                        activeTrackIndex={playerContext.activeTrackIndex}
+                        playlist={playerContext.playlist}
+                      />
+                    ),
+                    'spacer',
+                    'progress',
+                    'fullscreen'
+                  ]}
+                />
+              </FullscreenContextProvider>
+            </div>
+            <p>
+              Edit <code>src/App.js</code> and save to reload.
+            </p>
+            <a
+              className="App-link"
+              href="https://reactjs.org"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Learn React
+            </a>
+          </header>
+        </PlayerContextProvider>
       </div>
     );
   }
