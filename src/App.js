@@ -4,7 +4,8 @@ import './App.css';
 import {
   PlayerContextProvider,
   FullscreenContextProvider,
-  playerContextFilter
+  playerContextFilter,
+  PlayerContextGroup
 } from '@cassette/core';
 import { MediaPlayerControls, MediaPlayer } from '@cassette/player';
 import { VideoDisplay, ProgressBarDisplay } from '@cassette/components';
@@ -169,43 +170,45 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App" style={{ background: 'navy' }}>
-        <PlayerContextProvider
-          playlist={playlist}
-          initialStateSnapshot={this.snapshot}
-          onStateSnapshot={shot => {
-            localStorage.setItem('media_snapshot', JSON.stringify(shot));
-          }}
-        >
-          <header className="App-header">
-            <div
-              className="media_player_container"
-              ref={elem => this.mediaContainerElem = elem}
-            >
-              <FullscreenContextProvider>
-                <MediaPlayerControls
-                  showVideo
-                  controls={[
-                    'spacer',
-                    'playpause',
-                    () => <FfwButton />,
-                    'forwardskip',
-                    'mute',
-                    'spacer',
-                    'progress',
-                    'fullscreen'
-                  ]}
-                />
-              </FullscreenContextProvider>
-            </div>
-            <PlaylistMenu />
-          </header>
-          {this.state.scrolledPastVideo && <CornerVideoDisplay />}
-        </PlayerContextProvider>
-        <div style={{ padding: '2rem', width: 400 }}>
-          <MediaPlayer showVideo playlist={secondPlaylist} />
+      <PlayerContextGroup>
+        <div className="App" style={{ background: 'navy' }}>
+          <PlayerContextProvider
+            playlist={playlist}
+            initialStateSnapshot={this.snapshot}
+            onStateSnapshot={shot => {
+              localStorage.setItem('media_snapshot', JSON.stringify(shot));
+            }}
+          >
+            <header className="App-header">
+              <div
+                className="media_player_container"
+                ref={elem => this.mediaContainerElem = elem}
+              >
+                <FullscreenContextProvider>
+                  <MediaPlayerControls
+                    showVideo
+                    controls={[
+                      'spacer',
+                      'playpause',
+                      () => <FfwButton />,
+                      'forwardskip',
+                      'mute',
+                      'spacer',
+                      'progress',
+                      'fullscreen'
+                    ]}
+                  />
+                </FullscreenContextProvider>
+              </div>
+              <PlaylistMenu />
+            </header>
+            {this.state.scrolledPastVideo && <CornerVideoDisplay />}
+          </PlayerContextProvider>
+          <div style={{ padding: '2rem', width: 400 }}>
+            <MediaPlayer showVideo playlist={secondPlaylist} />
+          </div>
         </div>
-      </div>
+      </PlayerContextGroup>
     );
   }
 }
