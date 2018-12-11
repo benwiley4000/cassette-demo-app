@@ -8,7 +8,7 @@ import {
 } from '@cassette/core';
 import { MediaPlayerControls } from '@cassette/player';
 import { VideoDisplay, ProgressBarDisplay } from '@cassette/components';
-import '@cassette/player/src/styles/index.scss';
+import './player_styles.scss';
 
 import playlist from './playlist';
 
