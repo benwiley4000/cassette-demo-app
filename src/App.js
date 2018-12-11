@@ -11,7 +11,7 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <MediaPlayer playlist={playlist} />
+          <MediaPlayer showVideo playlist={playlist} />
           <p>
             Edit <code>src/App.js</code> and save to reload.
           </p>
