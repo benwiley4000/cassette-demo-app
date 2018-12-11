@@ -6,7 +6,7 @@ import {
   FullscreenContextProvider,
   playerContextFilter
 } from '@cassette/core';
-import { MediaPlayerControls } from '@cassette/player';
+import { MediaPlayerControls, MediaPlayer } from '@cassette/player';
 import { VideoDisplay, ProgressBarDisplay } from '@cassette/components';
 import './player_styles.scss';
 
@@ -126,6 +126,15 @@ FfwButton = playerContextFilter(FfwButton, [
   'onSetPlaybackRate'
 ]);
 
+const secondPlaylist = [
+  {
+    url:
+      'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
+    title: 'Elephants Dream',
+    artist: 'Orange Open Movie Project'
+  }
+];
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -160,7 +169,7 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
+      <div className="App" style={{ background: 'navy' }}>
         <PlayerContextProvider
           playlist={playlist}
           initialStateSnapshot={this.snapshot}
@@ -193,6 +202,9 @@ class App extends Component {
           </header>
           {this.state.scrolledPastVideo && <CornerVideoDisplay />}
         </PlayerContextProvider>
+        <div style={{ padding: '2rem', width: 400 }}>
+          <MediaPlayer showVideo playlist={secondPlaylist} />
+        </div>
       </div>
     );
   }
