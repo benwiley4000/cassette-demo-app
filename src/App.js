@@ -6,6 +6,21 @@ import '@cassette/player/dist/css/cassette-player.css';
 
 import playlist from './playlist';
 
+function TrackPosition({ activeTrackIndex, playlist }) {
+  return (
+    <div
+      style={{
+        fontSize: '1rem',
+        display: 'flex',
+        alignItems: 'center',
+        fontWeight: 'bold'
+      }}
+    >
+      Track {activeTrackIndex + 1} / {playlist.length}
+    </div>
+  );
+}
+
 class App extends Component {
   render() {
     return (
@@ -21,6 +36,13 @@ class App extends Component {
                 'forwardskip',
                 'volume',
                 'repeat',
+                'shuffle',
+                playerContext => (
+                  <TrackPosition
+                    activeTrackIndex={playerContext.activeTrackIndex}
+                    playlist={playerContext.playlist}
+                  />
+                ),
                 'spacer',
                 'progress',
                 'fullscreen'
