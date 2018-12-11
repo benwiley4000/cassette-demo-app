@@ -22,6 +22,11 @@ function TrackPosition({ activeTrackIndex, playlist }) {
 }
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.snapshot = JSON.parse(localStorage.getItem('media_snapshot'));
+  }
+
   render() {
     return (
       <div className="App">
@@ -47,6 +52,10 @@ class App extends Component {
                 'progress',
                 'fullscreen'
               ]}
+              initialStateSnapshot={this.snapshot}
+              onStateSnapshot={shot => {
+                localStorage.setItem('media_snapshot', JSON.stringify(shot));
+              }}
             />
           </div>
           <p>
