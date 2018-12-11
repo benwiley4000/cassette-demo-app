@@ -150,15 +150,7 @@ class App extends Component {
                     'spacer',
                     'playpause',
                     'forwardskip',
-                    'volume',
-                    'repeat',
-                    'shuffle',
-                    playerContext => (
-                      <TrackPosition
-                        activeTrackIndex={playerContext.activeTrackIndex}
-                        playlist={playerContext.playlist}
-                      />
-                    ),
+                    'mute',
                     'spacer',
                     'progress',
                     'fullscreen'
