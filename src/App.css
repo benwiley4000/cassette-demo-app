@@ -32,5 +32,6 @@
 }
 
 .media_player_container > * {
+  margin-top: 2rem;
   width: calc(100vw - 3rem);
 }
