@@ -96,6 +96,36 @@ CornerVideoDisplay = playerContextFilter(CornerVideoDisplay, [
   'onTogglePause'
 ]);
 
+function FfwButton({ playbackRate, onSetPlaybackRate }) {
+  return (
+    <div
+      style={{
+        fontSize: '2rem',
+        display: 'flex',
+        alignItems: 'center',
+        fontWeight: 'bold',
+        WebkitUserSelect: 'none',
+        MozUserSelect: 'none',
+        msUserSelect: 'none',
+        userSelect: 'none',
+        WebkitTouchCallout: 'none'
+      }}
+      onTouchStart={() => onSetPlaybackRate(3)}
+      onMouseDown={() => onSetPlaybackRate(3)}
+      onMouseUp={() => onSetPlaybackRate(1)}
+      onMouseLeave={() => onSetPlaybackRate(1)}
+      onTouchEnd={() => onSetPlaybackRate(1)}
+    >
+      ⏩
+    </div>
+  );
+}
+
+FfwButton = playerContextFilter(FfwButton, [
+  'playbackRate',
+  'onSetPlaybackRate'
+]);
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -149,6 +179,7 @@ class App extends Component {
                   controls={[
                     'spacer',
                     'playpause',
+                    () => <FfwButton />,
                     'forwardskip',
                     'mute',
                     'spacer',
