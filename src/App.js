@@ -3,7 +3,8 @@ import './App.css';
 
 import {
   PlayerContextProvider,
-  FullscreenContextProvider
+  FullscreenContextProvider,
+  playerContextFilter
 } from '@cassette/core';
 import { MediaPlayerControls } from '@cassette/player';
 import '@cassette/player/dist/css/cassette-player.css';
@@ -24,6 +25,48 @@ function TrackPosition({ activeTrackIndex, playlist }) {
     </div>
   );
 }
+
+function PlaylistMenu({ playlist, activeTrackIndex, onSelectTrackIndex }) {
+  return (
+    <div
+      style={{
+        width: '280px',
+        marginTop: '2rem',
+        marginBottom: '2rem',
+        fontSize: '1.2rem'
+      }}
+    >
+      <h2>Select a track:</h2>
+      {playlist.map((track, i) => {
+        const playing = activeTrackIndex === i;
+        return (
+          <div
+            key={i}
+            style={{
+              fontWeight: playing ? 'bold': undefined,
+              margin: '0.5rem',
+              padding: '0.5rem',
+              borderRadius: '0.25rem',
+              border: '2px solid white',
+              cursor: 'pointer',
+              textAlign: 'left',
+              marginBottom: '2rem'
+            }}
+            onClick={() => onSelectTrackIndex(i)}
+          >
+            {playing && '▶️'} <i>{track.artist}</i> - {track.title}
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+PlaylistMenu = playerContextFilter(PlaylistMenu, [
+  'playlist',
+  'activeTrackIndex',
+  'onSelectTrackIndex'
+]);
 
 class App extends Component {
   constructor(props) {
@@ -66,17 +109,7 @@ class App extends Component {
                 />
               </FullscreenContextProvider>
             </div>
-            <p>
-              Edit <code>src/App.js</code> and save to reload.
-            </p>
-            <a
-              className="App-link"
-              href="https://reactjs.org"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learn React
-            </a>
+            <PlaylistMenu />
           </header>
         </PlayerContextProvider>
       </div>
