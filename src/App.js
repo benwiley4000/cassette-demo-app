@@ -7,7 +7,7 @@ import {
   playerContextFilter
 } from '@cassette/core';
 import { MediaPlayerControls } from '@cassette/player';
-import { VideoDisplay } from '@cassette/components';
+import { VideoDisplay, ProgressBarDisplay } from '@cassette/components';
 import '@cassette/player/dist/css/cassette-player.css';
 
 import playlist from './playlist';
@@ -69,18 +69,32 @@ PlaylistMenu = playerContextFilter(PlaylistMenu, [
   'onSelectTrackIndex'
 ]);
 
-function CornerVideoDisplay() {
+function CornerVideoDisplay({ currentTime, duration }) {
   return (
-    <VideoDisplay
+    <div
       style={{
         width: 200,
         position: 'fixed',
         bottom: 25,
         right: 25
       }}
-    />
+    >
+      <VideoDisplay />
+      <ProgressBarDisplay
+        style={{ background: 'black', height: 5 }}
+        progressStyle={{ background: 'orange' }}
+        progress={currentTime / duration}
+        progressDirection="right"
+      />
+    </div>
   );
 }
+
+CornerVideoDisplay = playerContextFilter(CornerVideoDisplay, [
+  'currentTime',
+  'duration',
+  'onTogglePause'
+]);
 
 class App extends Component {
   constructor(props) {
