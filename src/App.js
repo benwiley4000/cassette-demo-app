@@ -7,6 +7,7 @@ import {
   playerContextFilter
 } from '@cassette/core';
 import { MediaPlayerControls } from '@cassette/player';
+import { VideoDisplay } from '@cassette/components';
 import '@cassette/player/dist/css/cassette-player.css';
 
 import playlist from './playlist';
@@ -68,10 +69,49 @@ PlaylistMenu = playerContextFilter(PlaylistMenu, [
   'onSelectTrackIndex'
 ]);
 
+function CornerVideoDisplay() {
+  return (
+    <VideoDisplay
+      style={{
+        width: 200,
+        position: 'fixed',
+        bottom: 25,
+        right: 25
+      }}
+    />
+  );
+}
+
 class App extends Component {
   constructor(props) {
     super(props);
     this.snapshot = JSON.parse(localStorage.getItem('media_snapshot'));
+    this.state = {
+      scrolledPastVideo: false
+    };
+    this.checkIfScrolledPastVideo = this.checkIfScrolledPastVideo.bind(this);
+  }
+
+  componentDidMount() {
+    this.checkIfScrolledPastVideo();
+    window.addEventListener('scroll', this.checkIfScrolledPastVideo);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.checkIfScrolledPastVideo);
+  }
+
+  checkIfScrolledPastVideo() {
+    const isScrolledPastVideo =
+      window.scrollY > this.mediaContainerElem.offsetTop + 200;
+    this.setState(({ scrolledPastVideo }) => {
+      if (isScrolledPastVideo === scrolledPastVideo) {
+        return null;
+      }
+      return {
+        scrolledPastVideo: isScrolledPastVideo
+      };
+    });
   }
 
   render() {
@@ -85,7 +125,10 @@ class App extends Component {
           }}
         >
           <header className="App-header">
-            <div className="media_player_container">
+            <div
+              className="media_player_container"
+              ref={elem => this.mediaContainerElem = elem}
+            >
               <FullscreenContextProvider>
                 <MediaPlayerControls
                   showVideo
@@ -111,6 +154,7 @@ class App extends Component {
             </div>
             <PlaylistMenu />
           </header>
+          {this.state.scrolledPastVideo && <CornerVideoDisplay />}
         </PlayerContextProvider>
       </div>
     );
