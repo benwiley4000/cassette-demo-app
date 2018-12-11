@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@cassette/components": "^2.0.0-alpha.9",
     "@cassette/core": "^2.0.0-alpha.9",
     "@cassette/player": "^2.0.0-alpha.9",
     "react": "^16.6.3",
