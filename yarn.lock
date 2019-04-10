@@ -790,7 +790,7 @@
   dependencies:
     prop-types "^15.5.10"
 
-"@cassette/player@2.0.0-beta.0":
+"@cassette/player@^2.0.0-beta.0":
   version "2.0.0-beta.0"
   resolved "https://registry.yarnpkg.com/@cassette/player/-/player-2.0.0-beta.0.tgz#0581776bfcc46f49aedea49313e8eb9f685d3545"
   integrity sha512-0NdIyNp+fy4RSd/0t/SU3AAuMIvQh1+5YFmge7cwdFyynw22X/KOwY4tTYS393QiEDEd3WJHJvkr7/hYtiLfdQ==
