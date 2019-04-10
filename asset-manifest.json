@@ -1,13 +1,13 @@
 {
-  "main.css": "/static/css/main.15af2208.chunk.css",
-  "main.js": "/static/js/main.91af9590.chunk.js",
-  "main.js.map": "/static/js/main.91af9590.chunk.js.map",
-  "static/js/1.9ff301eb.chunk.js": "/static/js/1.9ff301eb.chunk.js",
-  "static/js/1.9ff301eb.chunk.js.map": "/static/js/1.9ff301eb.chunk.js.map",
-  "runtime~main.js": "/static/js/runtime~main.229c360f.js",
-  "runtime~main.js.map": "/static/js/runtime~main.229c360f.js.map",
-  "static/css/main.15af2208.chunk.css.map": "/static/css/main.15af2208.chunk.css.map",
-  "index.html": "/index.html",
-  "precache-manifest.a16338b37586019b433a56dbf283d99b.js": "/precache-manifest.a16338b37586019b433a56dbf283d99b.js",
-  "service-worker.js": "/service-worker.js"
+  "main.css": "/cassette-demo-app/static/css/main.15af2208.chunk.css",
+  "main.js": "/cassette-demo-app/static/js/main.53707c56.chunk.js",
+  "main.js.map": "/cassette-demo-app/static/js/main.53707c56.chunk.js.map",
+  "static/js/1.9ff301eb.chunk.js": "/cassette-demo-app/static/js/1.9ff301eb.chunk.js",
+  "static/js/1.9ff301eb.chunk.js.map": "/cassette-demo-app/static/js/1.9ff301eb.chunk.js.map",
+  "runtime~main.js": "/cassette-demo-app/static/js/runtime~main.177c0cbd.js",
+  "runtime~main.js.map": "/cassette-demo-app/static/js/runtime~main.177c0cbd.js.map",
+  "static/css/main.15af2208.chunk.css.map": "/cassette-demo-app/static/css/main.15af2208.chunk.css.map",
+  "index.html": "/cassette-demo-app/index.html",
+  "precache-manifest.a46be9467a262ace29fe69c556b97c28.js": "/cassette-demo-app/precache-manifest.a46be9467a262ace29fe69c556b97c28.js",
+  "service-worker.js": "/cassette-demo-app/service-worker.js"
 }
